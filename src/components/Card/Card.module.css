@@ -1,0 +1,21 @@
+.card {
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  width: 50rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+.title {
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.details {
+  margin: 1rem 0 0;
+}

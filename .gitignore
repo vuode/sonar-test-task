@@ -11,6 +11,9 @@
 # production
 /build
 
+# graphql
+/src/generated.ts
+
 # misc
 .DS_Store
 .env.local
