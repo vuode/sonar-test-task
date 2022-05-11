@@ -1,30 +1,15 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 
 import Card from '../Card';
 
-import { useLaunchesQuery } from '../../generated';
+import { useLauches } from '../../hooks/useLaunches';
 
 import styles from './App.module.css';
 
 const limit = 10;
 
 const App: React.FC = () => {
-  const { data, loading, fetchMore } = useLaunchesQuery({
-    variables: {
-      limit,
-      offset: 0,
-    },
-    notifyOnNetworkStatusChange: true,
-  });
-
-  const [currentOffset, setCurrentOffset] = useState(limit);
-
-  const total = useMemo(
-    () => data?.launchesPastResult?.result?.totalCount || limit,
-    [data],
-  );
-
-  const entries = useMemo(() => data?.launchesPastResult?.data, [data]);
+  const { entries, loading, loadMore, allEntriesLoaded } = useLauches(limit);
 
   return (
     <div className='App'>
@@ -33,14 +18,8 @@ const App: React.FC = () => {
 
       {loading && <div className={styles.loading}>Loading...</div>}
 
-      {!loading && total > currentOffset && (
-        <button
-          type='button'
-          onClick={() => {
-            fetchMore({ variables: { offset: currentOffset } });
-            setCurrentOffset((previous) => previous + limit);
-          }}
-        >
+      {!loading && allEntriesLoaded && (
+        <button type='button' onClick={loadMore}>
           Load more
         </button>
       )}
