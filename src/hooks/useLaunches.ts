@@ -23,10 +23,7 @@ export const useLauches = (limit: number) => {
     [data?.launchesPastResult?.result?.totalCount, limit],
   );
 
-  const allEntriesLoaded = useMemo(
-    () => total <= currentOffset,
-    [currentOffset, total],
-  );
+  const hasMore = useMemo(() => total > currentOffset, [currentOffset, total]);
 
   const entries = useMemo(() => data?.launchesPastResult?.data, [data]);
 
@@ -35,5 +32,5 @@ export const useLauches = (limit: number) => {
     setCurrentOffset((previous) => previous + limit);
   }, [currentOffset, fetchMore, limit]);
 
-  return { entries, loading, loadMore, allEntriesLoaded };
+  return { entries, loading, loadMore, hasMore };
 };

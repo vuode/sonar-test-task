@@ -9,7 +9,7 @@ import styles from './App.module.css';
 const limit = 10;
 
 const App: React.FC = () => {
-  const { entries, loading, loadMore, allEntriesLoaded } = useLauches(limit);
+  const { entries, loading, loadMore, hasMore } = useLauches(limit);
 
   return (
     <div className='App'>
@@ -18,7 +18,7 @@ const App: React.FC = () => {
 
       {loading && <div className={styles.loading}>Loading...</div>}
 
-      {!loading && !allEntriesLoaded && (
+      {!loading && hasMore && (
         <button type='button' onClick={loadMore}>
           Load more
         </button>
