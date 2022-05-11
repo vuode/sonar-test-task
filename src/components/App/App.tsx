@@ -1,23 +1,44 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import Card from '../Card';
 
 import { useLaunchesQuery } from '../../generated';
 
+const limit = 10;
+
 const App: React.FC = () => {
-  const { data } = useLaunchesQuery({
+  const { data, fetchMore } = useLaunchesQuery({
     variables: {
-      limit: 10,
+      limit,
       offset: 0,
     },
   });
 
-  const entries = useMemo(() => data?.launchesPast, [data]);
+  const [currentOffset, setCurrentOffset] = useState(limit);
+
+  const total = useMemo(
+    () => data?.launchesPastResult?.result?.totalCount || limit,
+    [data],
+  );
+
+  const entries = useMemo(() => data?.launchesPastResult?.data, [data]);
 
   return (
     <div className='App'>
       {entries &&
         entries.map((entry) => entry && <Card key={entry.id} entry={entry} />)}
+
+      {total > currentOffset && (
+        <button
+          type='button'
+          onClick={() => {
+            fetchMore({ variables: { offset: currentOffset } });
+            setCurrentOffset((previous) => previous + limit);
+          }}
+        >
+          Load more
+        </button>
+      )}
     </div>
   );
 };
