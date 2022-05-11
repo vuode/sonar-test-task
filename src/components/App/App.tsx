@@ -16,12 +16,16 @@ const App: React.FC = () => {
       {entries &&
         entries.map((entry) => entry && <Card key={entry.id} entry={entry} />)}
 
-      {loading && <div className={styles.loading}>Loading...</div>}
+      {loading && <div className={styles.info}>Loading...</div>}
 
       {!loading && hasMore && (
         <button type='button' onClick={loadMore}>
           Load more
         </button>
+      )}
+
+      {!loading && !hasMore && (
+        <div className={styles.info}>End of the feed</div>
       )}
     </div>
   );
