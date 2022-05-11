@@ -18,7 +18,7 @@ const App: React.FC = () => {
 
       {loading && <div className={styles.loading}>Loading...</div>}
 
-      {!loading && allEntriesLoaded && (
+      {!loading && !allEntriesLoaded && (
         <button type='button' onClick={loadMore}>
           Load more
         </button>

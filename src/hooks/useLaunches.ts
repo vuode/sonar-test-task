@@ -24,7 +24,7 @@ export const useLauches = (limit: number) => {
   );
 
   const allEntriesLoaded = useMemo(
-    () => total > currentOffset,
+    () => total <= currentOffset,
     [currentOffset, total],
   );
 
