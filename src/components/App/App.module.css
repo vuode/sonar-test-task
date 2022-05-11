@@ -1,0 +1,11 @@
+.loading {
+  margin: 1rem auto;
+  padding: 1rem 5rem;
+  width: 20rem;
+  font-size: 2rem;
+  font-weight: 400;
+  color: gray;
+  text-align: center;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
